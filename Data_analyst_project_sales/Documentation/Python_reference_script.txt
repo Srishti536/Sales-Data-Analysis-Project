@@ -1,0 +1,63 @@
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+PYTHON DATA CLEANING REFERENCE SCRIPT
+Project: Sales Performance Executive Analysis
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Step 1: Importing Libraries and Data
+----------------------------------------------------------------------------
+import pandas as pd 
+path = 'C:\\Users\\srish\\OneDrive\\Desktop\\Data_analyst_project_sales\\Raw_data\\sales_data_sample.csv'
+df = pd.read_csv(path, encoding='latin1')
+
+Step 2: Handling Missing values and Duplicates
+----------------------------------------------------------------------------
+print("Missing values per column:")
+print(df.isnull().sum())
+df.drop_duplicates(inplace=True)
+
+Step 3: Standardizing Data Formats
+----------------------------------------------------------------------------
+df['ORDERDATE'] = pd.to_datetime(df['ORDERDATE'])
+
+Step 4: Calculating Business Metrics
+----------------------------------------------------------------------------
+df['Profit_Margin'] = (df['SALES'] - (df['QUANTITYORDERED'] * df['PRICEEACH'])) / df['SALES']
+
+Step 5: Save the cleaned file
+----------------------------------------------------------------------------
+output_path = 'C:\\Users\\srish\\OneDrive\\Desktop\\Data_analyst_project_sales\\Processed_data\\cleaned_sales_data.csv'
+df.to_csv(output_path, index=False)
+print("\n--- SUCCESS ---")
+print("Cleaned data saved to Processed_data folder!")
+
+OUTPUT
+Missing values per column:
+ORDERNUMBER            0
+QUANTITYORDERED        0
+PRICEEACH              0
+ORDERLINENUMBER        0
+SALES                  0
+ORDERDATE              0
+STATUS                 0
+QTR_ID                 0
+MONTH_ID               0
+YEAR_ID                0
+PRODUCTLINE            0
+MSRP                   0
+PRODUCTCODE            0
+CUSTOMERNAME           0
+PHONE                  0
+ADDRESSLINE1           0
+ADDRESSLINE2        2521
+CITY                   0
+STATE               1486
+POSTALCODE            76
+COUNTRY                0
+TERRITORY           1074
+CONTACTLASTNAME        0
+CONTACTFIRSTNAME       0
+DEALSIZE               0
+dtype: int64
+
+--- SUCCESS ---
+Cleaned data saved to Processed_data folder!
